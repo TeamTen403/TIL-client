@@ -1,110 +1,116 @@
-html {
-  padding: 0px;
-  margin: 0px;
-  height: 100%;
-  background-color: #f2f2f2;
-  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
-    'Helvetica Neue', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
-    sans-serif !important;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  padding: 0px;
-  margin: 0 auto;
-  /* max-width: 600px; */
-  overflow-x: hidden;
-  height: 100%;
-}
-
-#root {
-  display: flex;
-  height: 100%;
-  background-color: #f2f2f2;
-  -webkit-tap-highlight-color: transparent !important;
-}
-
-.App {
-  width: 100%;
-  height: 100%;
-  /* font-family: 'Noto Sans'; */
-  color: #1e222a;
-  font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
-    'Helvetica Neue', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
-    sans-serif !important;
-}
-
-img {
-  -webkit-user-drag: none;
-}
-
-button {
-  cursor: pointer;
-}
-
-button > span {
-  pointer-events: none;
-}
-
-::placeholder {
-  color: #848b9f;
-  font-size: 15px;
-  line-height: 20px;
-}
-
-/* ::-webkit-scrollbar {
-  display: none;
-} */
-
-::-webkit-scrollbar {
-  width: 0px;
-  height: 0px;
-}
-
-.visible-scrollbar::-webkit-scrollbar {
-  height: 12px;
-  width: 12px;
-}
-.visible-scrollbar::-webkit-scrollbar-track-piece {
-  background-color: rgba(255, 255, 255, 0.1);
-  width: 10px;
-}
-
-.visible-scrollbar::-webkit-scrollbar-thumb {
-  border-radius: 8px;
-  background-color: rgba(144, 150, 163, 0.6);
-  background-clip: padding-box;
-  border: 2px solid transparent;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2) inset;
-}
-
-:root {
-  --primary: #0062ff;
-  --primary-light: #d1e2ff;
-}
-
-a {
-  text-decoration: none;
-  color: unset;
-}
-
-a {
-  text-decoration: none;
-  color: unset;
-}
-a:visited {
-  color: unset;
-  text-decoration: none;
-}
-a:hover {
-  color: unset;
-  text-decoration: none;
-}
-a:active {
-  color: unset;
-  text-decoration: none;
-}
-
-* {
-  padding: 0px;
-  margin: 0px;
-}
+@layer base {
+    html {
+      padding: 0px;
+      margin: 0px;
+      height: 100%;
+      background-color: #f2f2f2;
+      font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+        'Helvetica Neue', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
+        sans-serif !important;
+    }
+  
+    body {
+      padding: 0px;
+      margin: 0 auto;
+      /* max-width: 600px; */
+      overflow-x: hidden;
+      height: 100%;
+    }
+  
+    #root {
+      display: flex;
+      height: 100%;
+      background-color: #f2f2f2;
+      -webkit-tap-highlight-color: transparent !important;
+    }
+  
+    .App {
+      width: 100%;
+      height: 100%;
+      /* font-family: 'Noto Sans'; */
+      color: #1e222a;
+      font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+        'Helvetica Neue', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji',
+        sans-serif !important;
+    }
+  
+    img {
+      -webkit-user-drag: none;
+    }
+  
+    button {
+      cursor: pointer;
+    }
+  
+    button > span {
+      pointer-events: none;
+    }
+  
+    ::placeholder {
+      color: #848b9f;
+      font-size: 15px;
+      line-height: 20px;
+    }
+  
+    /* ::-webkit-scrollbar {
+      display: none;
+    } */
+  
+    ::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+    }
+  
+    .visible-scrollbar::-webkit-scrollbar {
+      height: 12px;
+      width: 12px;
+    }
+    .visible-scrollbar::-webkit-scrollbar-track-piece {
+      background-color: rgba(255, 255, 255, 0.1);
+      width: 10px;
+    }
+  
+    .visible-scrollbar::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background-color: rgba(144, 150, 163, 0.6);
+      background-clip: padding-box;
+      border: 2px solid transparent;
+      box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2) inset;
+    }
+  
+    :root {
+      --primary: #0062ff;
+      --primary-light: #d1e2ff;
+    }
+  
+    a {
+      text-decoration: none;
+      color: unset;
+    }
+  
+    a {
+      text-decoration: none;
+      color: unset;
+    }
+    a:visited {
+      color: unset;
+      text-decoration: none;
+    }
+    a:hover {
+      color: unset;
+      text-decoration: none;
+    }
+    a:active {
+      color: unset;
+      text-decoration: none;
+    }
+  
+    * {
+      padding: 0px;
+      margin: 0px;
+    }
+  }
