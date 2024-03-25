@@ -1,7 +1,7 @@
-import "./App.css";
+import './App.css'
 
 function App() {
-  return <div></div>;
+  return <div className="h-full w-full p-[2px]">TIL</div>
 }
 
-export default App;
+export default App
