@@ -1,7 +1,8 @@
 import './App.css'
+import { Providers } from './providers'
 
 function App() {
-  return <div className="h-full w-full p-[2px]">TIL</div>
+  return <Providers />
 }
 
 export default App
