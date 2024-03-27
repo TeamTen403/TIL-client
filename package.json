@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.14",
+    "@mui/material": "^5.15.14",
     "@react-spring/web": "^9.7.3",
     "@types/node": "^20.11.30",
     "bunshi": "^2.1.4",
@@ -18,6 +22,7 @@
     "react": "^18.2.0",
     "react-calendar": "^4.8.0",
     "react-dom": "^18.2.0",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.22.3",
     "react-use": "^17.5.0",
     "tailwind-merge": "^2.2.2",
