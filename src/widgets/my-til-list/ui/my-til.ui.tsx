@@ -1,6 +1,6 @@
 import { Tag } from '@/entities/tag'
 
-export function TilThumbnail() {
+export function MyTil() {
   return (
     <div className="flex w-full flex-col rounded-md bg-[#D9D9D9] px-12 py-6">
       <div className="flex w-full gap-[8px]">
