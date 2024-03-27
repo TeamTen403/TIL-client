@@ -10,7 +10,9 @@ type Props = {
 export function MainLayout({ className }: Props) {
   return (
     <div className={twMerge('mx-auto h-full w-full max-w-[600px]', className)}>
-      <Outlet />
+      <div className="h-[calc(100%-52px)] w-full overflow-scroll">
+        <Outlet />
+      </div>
       <BottomNavigator />
     </div>
   )

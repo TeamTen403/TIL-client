@@ -36,7 +36,7 @@ function BottomNavigator() {
   ]
 
   return (
-    <div className="flex w-full bg-[#666666]">
+    <div className="flex h-52 w-full items-center bg-[#666666]">
       {navigates.map(navigate => (
         <NavigatorItem key={navigate.path} {...navigate} />
       ))}
