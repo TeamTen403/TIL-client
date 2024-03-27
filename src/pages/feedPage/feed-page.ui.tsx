@@ -1,3 +1,13 @@
+import { SearchBar } from '@/features/search-feed'
+import { MainLayoutHeader } from '@/shared/ui'
+import { FeedTilList } from '@/widgets/feed-til-list'
+
 export function FeedPage() {
-  return <div>FeedPage</div>
+  return (
+    <div className="w-full">
+      <MainLayoutHeader title="피드" />
+      <SearchBar/>
+      <FeedTilList />
+    </div>
+  )
 }

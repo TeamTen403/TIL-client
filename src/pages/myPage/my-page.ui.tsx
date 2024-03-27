@@ -1,6 +1,6 @@
 import { MainLayoutHeader } from '@/shared/ui'
 import { RecordsCalendar } from '@/widgets/records-calendar'
-import { TilThumbnailList } from '@/widgets/til-thumbnail-list'
+import { MyTilList } from '@/widgets/my-til-list'
 import { ViewerRecords } from '@/widgets/viewer-records'
 
 export function MyPage() {
@@ -9,7 +9,7 @@ export function MyPage() {
       <MainLayoutHeader title="마이페이지" />
       <ViewerRecords />
       <RecordsCalendar />
-      <TilThumbnailList />
+      <MyTilList />
     </div>
   )
 }
