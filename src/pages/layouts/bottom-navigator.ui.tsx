@@ -64,7 +64,7 @@ function NavigatorItem(props: NavigateType) {
   return (
     <div
       className={twMerge(
-        'flex flex-1 cursor-pointer items-center justify-center',
+        'flex flex-1 cursor-pointer h-full items-center justify-center text-[10px]',
         isSelected ? 'text-white' : 'text-black',
       )}
       onClick={handleNavigate}
