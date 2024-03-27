@@ -10,13 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-spring/web": "^9.7.3",
     "@types/node": "^20.11.30",
     "bunshi": "^2.1.4",
     "jotai": "^2.7.1",
     "path": "^0.12.7",
     "react": "^18.2.0",
+    "react-calendar": "^4.8.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
+    "react-use": "^17.5.0",
     "tailwind-merge": "^2.2.2",
     "zod": "^3.22.4"
   },
