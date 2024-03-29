@@ -1,7 +1,7 @@
 import { Tag } from '@/entities/tag'
 import { Bookmark, Favorite } from '@mui/icons-material'
 
-export function MyTil() {
+export function Til() {
   return (
     <div className="flex w-full flex-col rounded-[8px] bg-[white]  shadow-[0px_0px_4px_0px_rgba(217,217,217,0.7)]">
       <div className="flex flex-col gap-18 px-16  py-18">

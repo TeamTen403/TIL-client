@@ -1,1 +1,1 @@
-export { challengePageRoute } from './challenge-page.route'
+export { challengePageRoute } from './route'

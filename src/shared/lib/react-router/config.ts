@@ -20,4 +20,7 @@ export const pathKeys = {
   page404() {
     return pathKeys.root.concat('404/')
   },
+  option() {
+    return pathKeys.write().concat('option')
+  },
 }

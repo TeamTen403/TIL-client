@@ -1,1 +1,1 @@
-export { myPageRoute } from './my-page.route'
+export { myPageRoute } from './route'

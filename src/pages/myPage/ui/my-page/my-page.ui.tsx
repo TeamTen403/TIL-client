@@ -1,5 +1,5 @@
 import { RecordsCalendar } from '@/widgets/records-calendar'
-import { MyTilList } from '@/widgets/my-til-list'
+import { TilList } from '@/widgets/til-list'
 import { ViewerRecords } from '@/widgets/viewer-records'
 
 export function MyPage() {
@@ -8,12 +8,12 @@ export function MyPage() {
       <Header />
       <ViewerRecords />
       <RecordsCalendar />
-      <MyTilList />
+      <TilList />
     </div>
   )
 }
 
-export function Header() {
+function Header() {
   return (
     <div className="sticky top-0 z-50 flex h-40 w-full items-center justify-center bg-white px-[24px]">
       <div className="flex w-full items-center justify-between">
