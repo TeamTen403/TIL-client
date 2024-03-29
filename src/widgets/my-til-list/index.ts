@@ -1,1 +1,1 @@
-export * from './ui/my-til-list.ui'
+export * from './ui/MyTilList'
