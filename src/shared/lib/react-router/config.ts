@@ -20,6 +20,9 @@ export const pathKeys = {
   page404() {
     return pathKeys.root.concat('404/')
   },
+  signin() {
+    return pathKeys.root.concat('signin/')
+  },
   option() {
     return pathKeys.write().concat('option')
   },
