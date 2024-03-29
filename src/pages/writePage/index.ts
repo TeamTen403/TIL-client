@@ -1,1 +1,1 @@
-export { writePageRoute } from './write-page.route'
+export { writePageRoute } from './route/write-page.route'

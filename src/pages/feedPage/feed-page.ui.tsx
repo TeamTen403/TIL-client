@@ -1,4 +1,4 @@
-import { SearchBar } from '@/features/search-feed'
+import { SearchBar } from '@/features/feed'
 import { MainLayoutHeader } from '@/shared/ui'
 import { FeedTilList } from '@/widgets/feed-til-list'
 
