@@ -1,4 +1,11 @@
+import { pathKeys } from '@/shared/lib/react-router'
+import { useNavigate } from 'react-router-dom'
+
 export function SignInPage() {
+  const navigate = useNavigate()
+  const handleClickSignup = () => navigate(pathKeys.signup())
+  const handleClickLookAround = () => navigate(pathKeys.feed())
+
   return (
     <div className="flex h-full w-full flex-col overflow-scroll bg-[#F9FAFC] pb-16">
       <div className="w-full flex-col bg-white px-24 py-50">
@@ -75,7 +82,8 @@ export function SignInPage() {
           </svg>
         </div>
         <div className="flex w-full justify-around text-14 leading-21 text-[#BABABA]">
-          <span>둘러보기</span>|<span>회원가입</span>|<span>문의하기</span>
+          <button onClick={handleClickLookAround}>둘러보기</button>|
+          <button onClick={handleClickSignup}>회원가입</button>|<span>문의하기</span>
         </div>
       </div>
     </div>

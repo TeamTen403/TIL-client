@@ -1,5 +1,5 @@
 import { pathKeys } from '@/shared/lib/react-router'
-import { Person } from '@mui/icons-material'
+import { MarkUnreadChatAlt } from '@mui/icons-material'
 import { molecule } from 'bunshi'
 import { atom } from 'jotai'
 import { createElement } from 'react'
@@ -13,10 +13,10 @@ export type NavigateType = {
 
 export const BottomNavigatorMol = molecule(() => {
   const activeTabAtom = atom<NavigateType>({
-    path: pathKeys.mypage(),
-    title: '마이페이지',
-    icon: createElement(Person),
-    index: 0,
+    path: pathKeys.feed(),
+    title: '피드',
+    icon: createElement(MarkUnreadChatAlt),
+    index: 3,
   })
   return {
     atom: { activeTabAtom },

@@ -23,7 +23,7 @@ export const useAuthorization = () => {
   const navigate = useNavigate()
 
   const user = {
-    singed: false,
+    singed: true,
   }
 
   if (location.pathname != '/signin' && user.singed === false) {

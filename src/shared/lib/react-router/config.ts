@@ -23,6 +23,9 @@ export const pathKeys = {
   signin() {
     return pathKeys.root.concat('signin/')
   },
+  signup() {
+    return pathKeys.root.concat('signup/')
+  },
   option() {
     return pathKeys.write().concat('option')
   },
