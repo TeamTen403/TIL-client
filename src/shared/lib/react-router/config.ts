@@ -26,4 +26,7 @@ export const pathKeys = {
   option() {
     return pathKeys.write().concat('option')
   },
+  myInfoSetting(){
+    return pathKeys.mypage().concat('setting')
+  }
 }
