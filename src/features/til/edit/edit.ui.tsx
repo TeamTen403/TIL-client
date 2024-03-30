@@ -1,4 +1,7 @@
-import { useState } from 'react'
+import { selectedTemplateAtom } from '@/entities/template'
+import { usePostTilogImageMutation } from '@/entities/til/api'
+import { useAtomValue } from 'jotai'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import ReactQuill, { Quill } from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
@@ -43,23 +46,65 @@ const CustomToolbar = () => (
 )
 export function TilEditor() {
   const [test, setTest] = useState()
+  const selectedTemplate = useAtomValue(selectedTemplateAtom)
 
-  const modules = {
-    toolbar: {
-      container: '#toolbar',
-      handlers: {},
-    },
+  const quillRef = useRef<ReactQuill>(null)
+  console.log(test)
+
+  const { mutateAsync } = usePostTilogImageMutation()
+
+  const imageHandler = () => {
+    const input = document.createElement('input')
+    input.setAttribute('type', 'file')
+    input.setAttribute('accept', 'image/*')
+    input.click()
+    input.addEventListener('change', async () => {
+      const editor = quillRef.current?.getEditor()
+      const file = input.files[0]
+      const range = editor?.getSelection(true)
+      try {
+        // Firebase Method : uploadBytes, getDownloadURL
+        await mutateAsync({ image: file }).then(r => {
+          editor.insertEmbed(range.index, 'image', r.data.url)
+          // URL 삽입 후 커서를 이미지 뒷 칸으로 이동
+          editor.setSelection(range.index + 1)
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    })
   }
+
+  useEffect(() => {
+    const editor = quillRef.current?.getEditor()
+    editor?.setContents(selectedTemplate?.template)
+  }, [selectedTemplate])
+
+  const modules = useMemo(
+    () => ({
+      toolbar: {
+        container: '#toolbar',
+        handlers: {
+          image: imageHandler,
+        },
+      },
+    }),
+    [],
+  )
 
   return (
     <div className="relative flex w-full flex-1 flex-col">
-      <ReactQuill
-        modules={modules}
-        theme="snow"
-        placeholder="내용을 작성해주세요"
-        onChange={v => setTest(v)}
-        className="h-full bg-white"
-      />
+      <div className="flex flex-1 flex-col gap-8">
+        <input placeholder="제목을 작성해주세요" className="p-24" />
+        <ReactQuill
+          ref={quillRef}
+          modules={modules}
+          theme="snow"
+          placeholder="내용을 작성해주세요"
+          onChange={v => setTest(v)}
+          className="h-full bg-white"
+        />
+      </div>
       <CustomToolbar />
     </div>
   )
