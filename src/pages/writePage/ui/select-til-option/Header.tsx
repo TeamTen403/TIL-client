@@ -14,6 +14,8 @@ export function Header() {
     mutateAsync({
       title: title,
       content: test,
+      tagId:'',
+      thumbnail:''
     })
   }
 
