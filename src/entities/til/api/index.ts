@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import _ from 'lodash'
 
-export const postTilogImage = (params: { image: File }) => {
+export const postTilogImage = async (params: { image: File }) => {
   const formData = new FormData()
 
   _.forEach(params, (value, key) => {
@@ -20,4 +20,33 @@ export const postTilogImage = (params: { image: File }) => {
 
 export const usePostTilogImageMutation = () => {
   return useMutation({ mutationFn: postTilogImage })
+}
+
+export const postTilog = async (data: { title: string; content: string; thumbnail: string; tagId: string }) => {
+  return axios('http://115.85.180.123:9090/api/tilog', {
+    method: 'POST',
+    data: data,
+  }).then(
+    r =>
+      r.data as {
+        code: 'string'
+        data: {
+          id: 0
+          title: 'string'
+          tilerId: 'string'
+          nickname: 'string'
+          thumbnailUrl: 'string'
+          tagName: 'string'
+          likeCount: 0
+          regYmdt: '2024-03-30T02:04:28.752Z'
+          modYmdt: '2024-03-30T02:04:28.752Z'
+          isLiked: true
+          isBookmarked: true
+        }
+      },
+  )
+}
+
+export const usePostTilogMutation = () => {
+  return useMutation({ mutationFn: postTilog })
 }

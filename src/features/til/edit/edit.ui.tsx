@@ -1,6 +1,6 @@
 import { selectedTemplateAtom } from '@/entities/template'
 import { usePostTilogImageMutation } from '@/entities/til/api'
-import { useAtomValue } from 'jotai'
+import { atom, useAtom, useAtomValue } from 'jotai'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import ReactQuill, { Quill } from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
@@ -44,12 +44,18 @@ const CustomToolbar = () => (
     </span>
   </div>
 )
+
+export const contentAtom = atom('')
+contentAtom.onMount = set => set('')
+export const titleAtom = atom('')
+titleAtom.onMount = set => set('')
+
 export function TilEditor() {
-  const [test, setTest] = useState()
+  const [test, setTest] = useAtom(contentAtom)
+  const [title, setTitle] = useAtom(titleAtom)
   const selectedTemplate = useAtomValue(selectedTemplateAtom)
 
   const quillRef = useRef<ReactQuill>(null)
-  console.log(test)
 
   const { mutateAsync } = usePostTilogImageMutation()
 
@@ -82,12 +88,7 @@ export function TilEditor() {
 
   const modules = useMemo(
     () => ({
-      toolbar: {
-        container: '#toolbar',
-        handlers: {
-          image: imageHandler,
-        },
-      },
+      toolbar: { container: '#toolbar', handlers: { image: imageHandler } },
     }),
     [],
   )
@@ -95,7 +96,7 @@ export function TilEditor() {
   return (
     <div className="relative flex w-full flex-1 flex-col">
       <div className="flex flex-1 flex-col gap-8">
-        <input placeholder="제목을 작성해주세요" className="p-24" />
+        <input placeholder="제목을 작성해주세요" className="p-24" onChange={e => setTitle(e.target.value)} />
         <ReactQuill
           ref={quillRef}
           modules={modules}
