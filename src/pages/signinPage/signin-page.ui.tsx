@@ -1,11 +1,34 @@
+import { ISignInData } from '@/entities/viewer'
+import { useSigninMutation } from '@/entities/viewer/api/signin'
 import { pathKeys } from '@/shared/lib/react-router'
+import { ErrorMessage } from '@hookform/error-message'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
+import * as yup from 'yup'
+
 export function SignInPage() {
+  const schema = yup.object().shape({
+    email: yup.string().email('올바른 이메일을 입력해주세요').required('필수 값입니다.'),
+    passwd: yup.string().required('필수 값입니다.'),
+  })
+
   const navigate = useNavigate()
   const handleClickSignup = () => navigate(pathKeys.signup())
   const handleClickLookAround = () => navigate(pathKeys.feed())
 
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<ISignInData>({ resolver: yupResolver(schema) })
+
+  const { mutateAsync } = useSigninMutation()
+
+  const onSubmit = handleSubmit(data => {
+    mutateAsync(data)
+  })
   return (
     <div className="flex h-full w-full flex-col overflow-scroll bg-[#F9FAFC] pb-16">
       <div className="w-full flex-col bg-white px-24 py-50">
@@ -18,24 +41,35 @@ export function SignInPage() {
           <div className="flex w-full flex-col gap-8">
             <div className="text-14 font-[700] leading-20 text-[#4E4E4E]">아이디(이메일)</div>
             <input
+              {...register('email')}
               type="email"
               className="w-full border-b-1 border-[#BABABA] px-8 py-12 text-16 leading-24 placeholder:text-[#BABABA]"
               placeholder="아이디"
             />
+            <div className="text-12 text-[#FF5656]">
+              <ErrorMessage errors={errors} name="email" />
+            </div>
           </div>
 
           <div className="flex w-full flex-col gap-8">
             <div className="text-14 font-[700] leading-20 text-[#4E4E4E]">비밀번호</div>
             <input
+              {...register('passwd')}
               type="password"
               className="w-full border-b-1 border-[#BABABA] px-8 py-12 text-16 leading-24 placeholder:text-[#BABABA]"
               placeholder="비밀번호"
             />
+            <div className="text-12 text-[#FF5656]">
+              <ErrorMessage errors={errors} name="passwd" />
+            </div>
           </div>
           <div className="text-14 text-[#BABABA] underline">비밀번호를 잊으셨나요?</div>
         </div>
 
-        <button className="mt-32 w-full rounded-[8px] bg-[#FF5656] py-10 text-16 font-[700] leading-22 text-white">
+        <button
+          onClick={onSubmit}
+          className="mt-32 w-full rounded-[8px] bg-[#FF5656] py-10 text-16 font-[700] leading-22 text-white"
+        >
           로그인
         </button>
       </div>
