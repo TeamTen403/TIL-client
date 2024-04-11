@@ -4,7 +4,7 @@ const axiosInstance = (function () {
   let instance: AxiosInstance
 
   function init() {
-    instance = _axios.create({ withCredentials: true, baseURL: 'http://115.85.180.123:9090/' })
+    instance = _axios.create({ withCredentials: true, baseURL: 'https://tilog.life/' })
   }
 
   return {
