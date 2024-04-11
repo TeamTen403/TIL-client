@@ -18,7 +18,7 @@ const scheme = yup.object().shape({
     .string()
     .oneOf([yup.ref('passwd')], '비밀번호를 확인해 주세요')
     .required('필수 값입니다.'),
-  nickName: yup.string().min(2, '최소 2자').max(8, '최대 8자').required('필수 값입니다.'),
+    nickName: yup.string().min(2, '최소 2자').max(8, '최대 8자').required('필수 값입니다.'),
   job: yup.string().required('필수 값입니다.'),
   authProvider: yup.string().oneOf(['TIL_EMAIL', 'EMAIL', 'KAKAO', 'GOOGLE']).required('필수 값입니다.'),
 })
@@ -35,7 +35,6 @@ export function SignUpPage() {
     defaultValues: { authProvider: 'TIL_EMAIL' },
   })
 
-  console.log('%csrc/pages/signupPage/signup-page.ui.tsx:35 errors', 'color: #007acc;', errors)
   const { mutateAsync } = useJoinMutation()
 
   const handleClickComplete = handleSubmit(async data => {
