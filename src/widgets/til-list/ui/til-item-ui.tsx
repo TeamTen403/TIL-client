@@ -1,7 +1,7 @@
 import { Tag } from '@/entities/tag'
 import { axios } from '@/shared/lib'
 import { Bookmark, BookmarkBorder, Favorite, FavoriteBorder } from '@mui/icons-material'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import ReactQuill from 'react-quill'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,13 +23,19 @@ export function Til(props: {
   const handleClick = () => {
     navigate(`/til/${props.tilogId}`)
   }
-
+  const queryClient = useQueryClient()
   const { mutateAsync: like } = useMutation({
-    mutationFn: () => axios(`/api/tilog/${props.tilogId}/like`, { method: 'POST' }),
+    mutationFn: () => axios(`/api/tilog/${props.tilogId}/like`, { method: 'PUT' }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['feed'] })
+    },
   })
 
   const { mutateAsync: bookmark } = useMutation({
-    mutationFn: () => axios(`/api/tilog/${props.tilogId}/bookmark`, { method: 'POST' }),
+    mutationFn: () => axios(`/api/tilog/${props.tilogId}/bookmark`, { method: 'PUT' }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['feed'] })
+    },
   })
 
   const handleClickLike = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -65,7 +71,7 @@ export function Til(props: {
         </div>
 
         <div className="flex w-full gap-[16px]">
-          <div className="h-75 min-w-98 rounded-md bg-[#FFE6E6]">{props.thumbnailUrl}</div>
+          <img className="h-75 min-w-98 rounded-md bg-[#FFE6E6]" src={props.thumbnailUrl}></img>
           <div className="flex  flex-col gap-8">
             <span className="line-clamp-2  break-keep text-18 font-[700] leading-25">{props.title}</span>
             <span className="line-clamp-1  text-[#4E4E4E]">
