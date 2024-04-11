@@ -5,14 +5,18 @@ import { twMerge } from 'tailwind-merge'
 
 type Props = {
   tagAtom: Atom<TagType>
+  onSelect: (v: string) => void
 }
 
-export function TagSelector({ tagAtom }: Props) {
+export function TagSelector({ tagAtom, onSelect }: Props) {
   const tag = useAtomValue(tagAtom)
   const selectTag = useSetAtom(selectTagAtom)
   const isSelected = useAtomValue(useMemo(() => isSelectedTagAtomCreator(tag.value), [tag, selectTag]))
 
-  const handleSelectTag = () => selectTag(tag)
+  const handleSelectTag = () => {
+    selectTag(tag)
+    onSelect(tag.value)
+  }
 
   return (
     <span

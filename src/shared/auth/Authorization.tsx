@@ -23,7 +23,7 @@ export const useAuthorization = () => {
   const navigate = useNavigate()
 
   const user = {
-    singed: true,
+    singed: localStorage.getItem('token') ? true : false,
   }
 
   if (location.pathname != '/signin' && user.singed === false) {
@@ -55,7 +55,7 @@ export const Authorization = ({ children }: AuthorizationProps) => {
   React.useEffect(() => {
     if (!canAccess) {
       const from = `${location.pathname}${location.search ? location.search : ''}`
-      navigate(pathKeys.signin(), { state: { from: from } })
+      navigate(pathKeys.signin(), { replace: true, state: { from: from } })
     }
   }, [canAccess])
 

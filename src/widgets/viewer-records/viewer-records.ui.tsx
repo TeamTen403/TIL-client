@@ -5,8 +5,27 @@ import { useMeasure } from 'react-use'
 import { animated, useSpring } from '@react-spring/web'
 import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp'
 import { twMerge } from 'tailwind-merge'
+import { axios } from '@/shared/lib'
+import { useQuery } from '@tanstack/react-query'
+
+const getRecords = () => {
+  return axios('/api/tiler/statistics').then(
+    r =>
+      r.data as {
+        code: 'SUCCESS'
+        data: {
+          consecutiveDays: 0
+          totalTilog: 0
+          totalLikes: 0
+          totalChallenge: 0
+        }
+      },
+  )
+}
 
 export function ViewerRecords() {
+  const { data } = useQuery({ queryKey: ['records'], queryFn: getRecords })
+
   const { atom } = useMolecule(ViewerRecordsMol)
   const [isOpen, setOpen] = useAtom(atom.isOpenAtom)
 
@@ -20,8 +39,7 @@ export function ViewerRecords() {
   return (
     <div
       className={twMerge(
-        'relative z-10 flex w-full flex-col bg-white  py-24 pb-0 shadow-[0px_4px_4px_1px_rgba(0,0,0,0.25)]',
-        isOpen ? 'sticky top-40' : '',
+        'relative z-10 flex max-h-[85vh] w-full flex-col bg-white  py-24 pb-0 shadow-[0px_4px_4px_1px_rgba(0,0,0,0.25)]',
       )}
     >
       <div className="absolute left-0 top-0 h-[206px] w-full  bg-gradient-to-b from-[#FF5656] from-[80%] to-[#FFC961] to-100%"></div>
@@ -33,29 +51,32 @@ export function ViewerRecords() {
 
       <div className=" z-10 mx-24 mb-25 flex rounded-[100px] bg-[rgba(255,255,255,0.7)] px-24 py-10">
         <span className="text-20 font-[700] leading-28 text-[#FF3A3A]">
-          00<span className="text-16 font-[400] leading-24 text-[#4E4E4E]">일 연속 기록하는 중🔥</span>
+          {data?.data.consecutiveDays}
+          <span className="text-16 font-[400] leading-24 text-[#4E4E4E]">일 연속 기록하는 중🔥</span>
         </span>
       </div>
 
       <div className="z-10 mb-9 flex w-full justify-around gap-8 px-24">
-        <div className="flex h-125 w-full flex-col items-center justify-center rounded-[8px] bg-white p-16 px-18 shadow-[0px_0px_4px_0px_rgba(217,217,217,0.7)]">
-          <div>틸로그</div>
-          <div>아이콘</div>
-          <div>000개</div>
+        <div className="flex h-125 w-full flex-col items-center justify-center gap-4 rounded-[8px] bg-white p-16 px-18 shadow-[0px_0px_4px_0px_rgba(217,217,217,0.7)]">
+          <div className="min-h-40 min-w-40 rounded-full bg-[#F8F8F8]"></div>
+          <div className="text-14 text-[#4E4E4E]">쌓은 틸로그</div>
+          <div className="rounded-[100px] bg-[#FF5656] px-8 text-14 font-[700] text-white">{data?.data.totalTilog}</div>
         </div>
-        <div className="flex h-125 w-full flex-col items-center justify-center rounded-[8px] bg-white p-16 px-18 shadow-[0px_0px_4px_0px_rgba(217,217,217,0.7)]">
-          <div>틸로그</div>
-          <div>아이콘</div>
-          <div>000개</div>
+        <div className="flex h-125 w-full flex-col items-center justify-center gap-4 rounded-[8px] bg-white p-16 px-18 shadow-[0px_0px_4px_0px_rgba(217,217,217,0.7)]">
+          <div className="min-h-40 min-w-40 rounded-full bg-[#F8F8F8]"></div>
+          <div className="text-14 text-[#4E4E4E]">받은 좋아요 </div>
+          <div className="rounded-[100px] bg-[#FF5656] px-8 text-14 font-[700] text-white">{data?.data.totalLikes}</div>
         </div>
-        <div className="flex h-125 w-full flex-col items-center justify-center rounded-[8px] bg-white p-16 px-18 shadow-[0px_0px_4px_0px_rgba(217,217,217,0.7)]">
-          <div>틸로그</div>
-          <div>아이콘</div>
-          <div>000개</div>
+        <div className="flex h-125 w-full flex-col items-center justify-center gap-4 rounded-[8px] bg-white p-16 px-18 shadow-[0px_0px_4px_0px_rgba(217,217,217,0.7)]">
+          <div className="min-h-40 min-w-40 rounded-full bg-[#F8F8F8]"></div>
+          <div className="text-14 text-[#4E4E4E]">챌린지 점수</div>
+          <div className="rounded-[100px] bg-[#FF5656] px-8 text-14 font-[700] text-white">
+            {data?.data.totalChallenge}
+          </div>
         </div>
       </div>
 
-      <animated.div className={'w-full'} style={open}>
+      <animated.div className={'w-full '} style={open}>
         <div ref={el => el && bind(el)} className="flex w-full flex-col gap-32 px-24">
           <div className="flex w-full flex-col gap-16">
             <div className="text-16 font-[700]">🌲 로그를 쌓아요</div>

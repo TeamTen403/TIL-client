@@ -1,12 +1,13 @@
 import { pathKeys } from '@/shared/lib/react-router'
 import { useMolecule } from 'bunshi/react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { BottomNavigatorMol, NavigateType } from './bottom-navigator.model'
 import { useAtom, useAtomValue } from 'jotai'
 import { twMerge } from 'tailwind-merge'
 import { Create, LocalFireDepartment, MarkUnreadChatAlt, Person } from '@mui/icons-material'
 import { useMeasure } from 'react-use'
 import { animated, config, useSpring } from '@react-spring/web'
+import { useEffect } from 'react'
 
 function BottomNavigator() {
   const navigates: NavigateType[] = [
@@ -40,9 +41,14 @@ function BottomNavigator() {
     atom: { activeTabAtom },
   } = useMolecule(BottomNavigatorMol)
 
-  const activeTab = useAtomValue(activeTabAtom)
+  const [activeTab, setTab] = useAtom(activeTabAtom)
   const [bind, { width }] = useMeasure()
   const move = useSpring({ left: activeTab.index * (width / 4), config: config.wobbly })
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    setTab(navigates.find(navigate => navigate.path === pathname) || navigates[3])
+  }, [pathname])
 
   return (
     <div ref={el => el && bind(el)} className="flex h-60 w-full flex-col bg-white">

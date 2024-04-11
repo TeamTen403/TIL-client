@@ -29,7 +29,10 @@ export const pathKeys = {
   option() {
     return pathKeys.write().concat('option')
   },
-  myInfoSetting(){
+  myInfoSetting() {
     return pathKeys.mypage().concat('setting')
-  }
+  },
+  til() {
+    return pathKeys.root.concat('til/:id')
+  },
 }

@@ -1,3 +1,7 @@
-export function Tag() {
-  return <div className="rounded-sm bg-[#FFA0A0] px-4 py-2 text-12 font-[700]">커뮤니케이션</div>
+export function Tag(props: { name: string }) {
+  return (
+    <div className=" rounded-[100px] border-1 border-[#FFA0A0] px-4 py-2 text-10 font-[700] text-[#FF7878]">
+      {props.name}
+    </div>
+  )
 }

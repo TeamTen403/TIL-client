@@ -27,10 +27,11 @@ export function SignInPage() {
   const { mutateAsync } = useSigninMutation()
 
   const onSubmit = handleSubmit(data => {
-    mutateAsync(data)
+    mutateAsync(data, { onSuccess: () => navigate(pathKeys.feed()) })
   })
+
   return (
-    <div className="flex h-full w-full flex-col overflow-scroll bg-[#F9FAFC] pb-16">
+    <form onSubmit={onSubmit} className="flex h-full w-full flex-col overflow-scroll bg-[#F9FAFC] pb-16">
       <div className="w-full flex-col bg-white px-24 py-50">
         <div className="mb-48 w-full  text-24 leading-33">
           <span className="font-[700] text-[#FF5656]">오늘 새로운 배움</span>을<br />
@@ -120,6 +121,6 @@ export function SignInPage() {
           <button onClick={handleClickSignup}>회원가입</button>|<span>문의하기</span>
         </div>
       </div>
-    </div>
+    </form>
   )
 }

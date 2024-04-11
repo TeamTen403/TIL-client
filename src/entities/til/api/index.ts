@@ -1,5 +1,6 @@
-import { useMutation } from '@tanstack/react-query'
-import axios from 'axios'
+import { axios } from '@/shared/lib'
+import { useMutation, useQuery } from '@tanstack/react-query'
+
 import _ from 'lodash'
 
 export const postTilogImage = async (params: { image: File }) => {
@@ -49,4 +50,35 @@ export const postTilog = async (data: { title: string; content: string; thumbnai
 
 export const usePostTilogMutation = () => {
   return useMutation({ mutationFn: postTilog })
+}
+
+export const getFeed = async () => {
+  return axios(`/api/tilog/feed`).then(
+    r =>
+      r.data as {
+        code: 'SUCCESS'
+        data: {
+          popularList: [
+            {
+              tilogId: number
+              title: string
+              tilerEmail: string
+              nickname?: string
+              thumbnailUrl?: string
+              tagName: string
+              likeCount: number
+              regYmdt: string
+              modYmdt: string
+              isLiked: boolean
+              isBookmarked: boolean
+            },
+          ]
+          tilogList: []
+        }
+      },
+  )
+}
+
+export const useGetFeed = () => {
+  return useQuery({ queryKey: ['feed'], queryFn: getFeed })
 }

@@ -1,22 +1,30 @@
 import { usePostTilogMutation } from '@/entities/til/api'
-import { contentAtom, titleAtom } from '@/features/til'
+import { tilDtoAtom } from '@/features/til/edit/edit.model'
+import { pathKeys } from '@/shared/lib'
+import { useModal } from '@/shared/lib/modal'
+import { confirmAlert } from '@/shared/lib/react-confirm'
+import AlertModal from '@/shared/ui/modals/AlertModal'
 import { KeyboardArrowLeft } from '@mui/icons-material'
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
 import { useNavigate } from 'react-router-dom'
 
 export function Header() {
-  const [test, setTest] = useAtom(contentAtom)
-  const [title, setTitle] = useAtom(titleAtom)
+  // const [test, setTest] = useAtom(contentAtom)
+  // const [title, setTitle] = useAtom(titleAtom)
+
+  const tilDto = useAtomValue(tilDtoAtom)
+
   const navigate = useNavigate()
   const { mutateAsync } = usePostTilogMutation()
   const handleClickBack = () => navigate(-1)
   const handleClickSave = () => {
-    mutateAsync({
-      title: title,
-      content: test,
-      tagId:'',
-      thumbnail:''
-    })
+    if (tilDto)
+      mutateAsync(tilDto, {
+        onSuccess: () =>
+          confirmAlert({
+            options: { title: '등록 완료', buttons: [{ label: '확인', onClick: () => navigate(pathKeys.feed()) }] },
+          }),
+      })
   }
 
   return (

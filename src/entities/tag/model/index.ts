@@ -28,5 +28,7 @@ export const defaultTagList: TagType[] = [
 export const tagListAtom = atom(defaultTagList)
 export const tagAtomsAtom = splitAtom(tagListAtom)
 export const selectedTagAtom = atom<TagType | null>(null)
+selectedTagAtom.onMount = set => set(null)
+
 export const selectTagAtom = atom(null, (_, set, update: TagType) => set(selectedTagAtom, update))
 export const isSelectedTagAtomCreator = (value: TagValue) => atom(get => get(selectedTagAtom)?.value == value)
