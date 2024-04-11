@@ -12,7 +12,7 @@ export const postTilogImage = async (params: { image: File }) => {
     }
   })
 
-  return axios('http://115.85.180.123:9090/api/tilog/image', {
+  return axios('api/tilog/image', {
     method: 'POST',
     data: formData,
     headers: { 'Content-Type': 'multipart/form-data' },
@@ -24,7 +24,7 @@ export const usePostTilogImageMutation = () => {
 }
 
 export const postTilog = async (data: { title: string; content: string; thumbnail: string; tagId: string }) => {
-  return axios('http://115.85.180.123:9090/api/tilog', {
+  return axios('api/tilog', {
     method: 'POST',
     data: data,
   }).then(
@@ -53,7 +53,7 @@ export const usePostTilogMutation = () => {
 }
 
 export const getFeed = async () => {
-  return axios(`/api/tilog/feed`).then(
+  return axios(`api/tilog/feed`).then(
     r =>
       r.data as {
         code: 'SUCCESS'
